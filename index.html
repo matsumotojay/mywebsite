@@ -45,6 +45,7 @@ nav {
 .hero-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
 .hero-bg iframe {
   position: absolute; top: 50%; left: 50%;
+  /* Mobile: vertical reel — fill height, center horizontally */
   width: 177.78vh; height: 100vh;
   min-width: 100%; min-height: 56.25vw;
   transform: translate(-50%, -50%);
@@ -52,10 +53,11 @@ nav {
 }
 @media (min-width: 901px) {
   .hero-bg iframe {
+    /* Desktop: zoom to fill full width, no black bars */
     width: 100vw;
-    height: 56.25vw;
+    height: 177.78vw; /* treat as vertical reel, zoom way in */
+    min-width: 100vw;
     min-height: 100vh;
-    min-width: 177.78vh;
   }
 }
 .hero-gradient {
@@ -281,7 +283,9 @@ footer { padding: 28px 52px; border-top: 1px solid var(--border); display: flex;
   nav { padding: 20px 24px; }
   .nav-links { display: none; }
   section { padding: 72px 24px; }
-  .hero-content { width: 100%; padding: 0 24px; justify-content: flex-end; padding-bottom: 80px; }
+  .hero-content { width: 100%; padding: 0 24px; justify-content: flex-end; padding-bottom: 80px; text-align: center; align-items: center; }
+  .hero-bio { max-width: 100%; }
+  .hero-trust { text-align: center; }
   .hero-scroll { display: none; }
 
   /* 2 columns on mobile — 10 videos = 5 rows of 2, clean */
@@ -423,39 +427,39 @@ footer { padding: 28px 52px; border-top: 1px solid var(--border); display: flex;
   </div>
   <div class="photo-section fade-up" style="transition-delay:0.3s;">
     <div class="photo-grid" id="dining-photos">
-      <div class="photo-item" data-photo><img src="WID07008.jpg" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="DSC01973.JPEG" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="WID06971.jpg" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item wide" data-photo><img src="_7RV2737.jpg" alt="" loading="lazy" onclick="openLB(this.src)"></div>
-      <div class="photo-item" data-photo><img src="IMG_3211.JPG" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="IMG_2478.JPG" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="DSC09911.JPEG" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="WID06957.jpg" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="DSC01883.JPEG" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item wide" data-photo><img src="IMG_8683.JPG" alt="" loading="lazy" onclick="openLB(this.src)"></div>
-      <div class="photo-item" data-photo><img src="IMG_6519.JPG" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="IMG_2476.JPG" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="IMG_8673.JPG" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="WID06765.jpg" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="_7RV2594.jpg" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="_7RV2599.jpg" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="WID07382_Original.jpg" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="IMG_8681.JPG" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="WID00101_Original.jpg" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="_7RV2742.jpg" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="DSC00334.JPG" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item wide" data-photo><img src="IMG_8678.JPG" alt="" loading="lazy" onclick="openLB(this.src)"></div>
-      <div class="photo-item" data-photo><img src="IMG_8669.JPG" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="DSC02116.JPEG" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="DSC01984.JPEG" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="_7RV2722.jpg" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="_7RV2659.jpg" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="WID07411_Original.jpg" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="WID07433_Original.jpg" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="IMG_8672.JPG" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item wide" data-photo><img src="H69A0871.JPEG" alt="" loading="lazy" onclick="openLB(this.src)"></div>
-      <div class="photo-item" data-photo><img src="_7RV2614.jpg" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
-      <div class="photo-item" data-photo><img src="DSC02033.JPEG" alt="" loading="lazy" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="WID07008.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="DSC01973.JPEG" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="WID06971.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+
+      <div class="photo-item" data-photo><img src="IMG_3211.JPG" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="IMG_2478.JPG" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="DSC09911.JPEG" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="WID06957.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="DSC01883.JPEG" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item wide" data-photo><img src="IMG_8683.JPG" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="IMG_6519.JPG" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="IMG_2476.JPG" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="IMG_8673.JPG" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="WID06765.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="_7RV2594.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="_7RV2599.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="WID07382_Original.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="IMG_8681.JPG" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="WID00101_Original.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="_7RV2742.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="DSC00334.JPG" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item wide" data-photo><img src="IMG_8678.JPG" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="IMG_8669.JPG" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="DSC02116.JPEG" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="DSC01984.JPEG" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="_7RV2722.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="_7RV2659.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="WID07411_Original.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="WID07433_Original.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="IMG_8672.JPG" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item wide" data-photo><img src="H69A0871.JPEG" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="_7RV2614.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
+      <div class="photo-item" data-photo><img src="DSC02033.JPEG" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'" onclick="openLB(this.src, \'dining\')"></div>
     </div>
     <div class="photo-fade" id="photo-fade"></div>
     <div class="load-more-wrap" id="load-more-wrap">
@@ -540,27 +544,27 @@ footer { padding: 28px 52px; border-top: 1px solid var(--border); display: flex;
     <div class="sub-header-line"></div>
   </div>
   <div class="photo-section fade-up" style="transition-delay:0.2s;">
-    <div class="photo-grid" style="grid-template-columns: repeat(2,1fr); gap:3px;">
-      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC08962.jpg" alt="" loading="lazy"></div>
-      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09260.jpg" alt="" loading="lazy"></div>
-      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC01129.jpg" alt="" loading="lazy"></div>
-      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09657.jpg" alt="" loading="lazy"></div>
-      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09077.jpg" alt="" loading="lazy"></div>
-      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09667.png" alt="" loading="lazy"></div>
-      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09058 (1).jpg" alt="" loading="lazy"></div>
-      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09623.jpg" alt="" loading="lazy"></div>
-      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09072.jpg" alt="" loading="lazy"></div>
-      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09539.jpg" alt="" loading="lazy"></div>
-      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09130.jpg" alt="" loading="lazy"></div>
-      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09498.jpg" alt="" loading="lazy"></div>
-      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09068.jpg" alt="" loading="lazy"></div>
-      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09492.jpg" alt="" loading="lazy"></div>
-      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC08899.jpg" alt="" loading="lazy"></div>
-      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09457.jpg" alt="" loading="lazy"></div>
-      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09465.jpg" alt="" loading="lazy"></div>
-      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC08056.jpg" alt="" loading="lazy"></div>
-      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC08059.jpg" alt="" loading="lazy"></div>
-      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC08058.jpg" alt="" loading="lazy"></div>
+    <div class="photo-grid" id="hotel-photos" style="grid-template-columns: repeat(2,1fr); gap:3px;">
+      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC08962.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'"></div>
+      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09260.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'"></div>
+      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC01129.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'"></div>
+      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09657.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'"></div>
+      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09077.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'"></div>
+      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09667.png" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'"></div>
+      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09058 (1).jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'"></div>
+      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09623.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'"></div>
+      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09072.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'"></div>
+      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09539.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'"></div>
+      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09130.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'"></div>
+      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09498.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'"></div>
+      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09068.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'"></div>
+      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09492.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'"></div>
+      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC08899.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'"></div>
+      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09457.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'"></div>
+      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC09465.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'"></div>
+      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC08056.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'"></div>
+      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC08059.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'"></div>
+      <div class="photo-item" data-hphoto onclick="openLBImg(this, 'hotel')"><img src="DSC08058.jpg" alt="" loading="lazy" onerror="this.closest('.photo-item').style.cssText='display:none!important'"></div>
     </div>
     <div class="photo-fade" id="hotel-photo-fade"></div>
     <div class="load-more-wrap" id="hotel-load-more-wrap">
@@ -618,12 +622,19 @@ footer { padding: 28px 52px; border-top: 1px solid var(--border); display: flex;
 <script>
 
 // ── LOAD MORE PHOTOS ──
-const PHOTOS_PER_PAGE = 10; // 2 rows of 5
+// Desktop: 5 cols × 3 rows = 15 | Mobile: 2 cols × 5 rows = 10
+const isMobile = () => window.innerWidth <= 900;
+const DINING_INITIAL = () => isMobile() ? 10 : 15;
+const DINING_PER_PAGE = () => isMobile() ? 10 : 15;
+const HOTEL_INITIAL  = () => isMobile() ? 10 : 6;  // hotel grid is always 2-col
+const HOTEL_PER_PAGE = () => isMobile() ? 10 : 6;
+
 let photosShown = 0;
 const allPhotoItems = document.querySelectorAll('#dining-photos [data-photo]');
 
 function loadMore() {
-  const end = Math.min(photosShown + PHOTOS_PER_PAGE, allPhotoItems.length);
+  const batch = photosShown === 0 ? DINING_INITIAL() : DINING_PER_PAGE();
+  const end = Math.min(photosShown + batch, allPhotoItems.length);
   for (let i = photosShown; i < end; i++) {
     allPhotoItems[i].classList.add('visible');
   }
@@ -633,16 +644,14 @@ function loadMore() {
     document.getElementById('load-more-wrap').classList.add('hidden');
   }
 }
-// Show first batch on load
 loadMore();
 
-// ── LOAD MORE HOTEL PHOTOS ──
-const HOTEL_PER_PAGE = 10;
 let hotelShown = 0;
 const allHotelItems = document.querySelectorAll('#hotel-photos [data-hphoto]');
 
 function loadMoreHotel() {
-  const end = Math.min(hotelShown + HOTEL_PER_PAGE, allHotelItems.length);
+  const batch = hotelShown === 0 ? HOTEL_INITIAL() : HOTEL_PER_PAGE();
+  const end = Math.min(hotelShown + batch, allHotelItems.length);
   for (let i = hotelShown; i < end; i++) {
     allHotelItems[i].classList.add('visible');
   }
@@ -652,7 +661,6 @@ function loadMoreHotel() {
     document.getElementById('hotel-load-more-wrap').classList.add('hidden');
   }
 }
-// Show first batch on load
 loadMoreHotel();
 
 // ── HIDE FAILED VIMEO EMBEDS ──
