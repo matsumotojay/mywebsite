@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matsu — Jay Matsumoto</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cormorant+SC:wght@300;400&family=DM+Sans:wght@200;300;400&display=swap');
+
+:root {
+  --bg: #080808;
+  --gold: #c9a96e;
+  --gold-dim: rgba(201,169,110,0.1);
+  --text: #f0ede8;
+  --muted: #777;
+  --dim: #333;
+  --border: #1a1a1a;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
+
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 999; opacity: 0.3;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 28px 52px;
+  background: linear-gradient(180deg, rgba(8,8,8,0.92) 0%, transparent 100%);
+}
+.nav-logo { font-family: 'Cormorant SC', serif; font-weight: 300; font-size: 20px; letter-spacing: 0.3em; color: var(--text); text-decoration: none; }
+.nav-links { display: flex; gap: 44px; list-style: none; }
+.nav-links a { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.3s; }
+.nav-links a:hover { color: var(--gold); }
+
+/* HERO */
+.hero { position: relative; height: 100vh; display: flex; align-items: flex-end; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.hero-bg iframe {
+  position: absolute; top: 50%; left: 50%;
+  width: 177.78vh; height: 100vh;
+  min-width: 100%; min-height: 56.25vw;
+  transform: translate(-50%, -50%);
+  border: none; opacity: 0.5;
+}
+.hero-gradient {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(8,8,8,0.2) 0%, rgba(8,8,8,0.0) 30%, rgba(8,8,8,0.5) 70%, rgba(8,8,8,1) 100%);
+}
+.hero-content { position: relative; z-index: 2; padding: 0 52px 80px; width: 100%; }
+.hero-eyebrow { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; font-weight: 200; }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(60px, 10vw, 116px); line-height: 0.92; color: var(--text); margin-bottom: 28px; }
+.hero-title em { font-style: italic; color: var(--gold); }
+.hero-sub { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+.hero-scroll { position: absolute; bottom: 44px; right: 52px; display: flex; flex-direction: column; align-items: center; gap: 10px; z-index: 2; }
+.hero-scroll span { font-size: 8px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); writing-mode: vertical-rl; }
+.scroll-line { width: 1px; height: 56px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollAnim 2.2s ease-in-out infinite; }
+@keyframes scrollAnim {
+  0% { transform: scaleY(0); transform-origin: top; opacity: 1; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+}
+
+/* SECTIONS */
+section { padding: 112px 52px; }
+.section-header { display: flex; align-items: baseline; gap: 20px; margin-bottom: 56px; }
+.section-num { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px; color: var(--gold); }
+.section-title { font-family: 'Cormorant SC', serif; font-weight: 300; font-size: clamp(28px, 4.5vw, 48px); letter-spacing: 0.1em; }
+.section-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
+
+/* VIDEO GRID */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 3px;
+  margin-bottom: 3px;
+}
+.hotel-video-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3px;
+  margin-bottom: 3px;
+}
+
+/* VIDEO ITEM */
+.video-item {
+  position: relative;
+  aspect-ratio: 9/16;
+  overflow: hidden;
+  background: #0f0f0f;
+  cursor: pointer;
+}
+.hotel-video-grid .video-item { aspect-ratio: 9/16; }
+.video-item iframe {
+  position: absolute; top: 50%; left: 50%;
+  width: 177.78%; height: 100%;
+  min-width: 100%; min-height: 100%;
+  transform: translate(-50%, -50%);
+  border: none;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+.video-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,8,8,0.75) 0%, transparent 55%); pointer-events: none; z-index: 1; }
+.video-meta { position: absolute; bottom: 16px; left: 16px; z-index: 2; }
+.video-client { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16px; color: var(--text); line-height: 1; }
+
+/* SOUND INDICATOR */
+.sound-indicator {
+  position: absolute;
+  top: 14px; right: 14px;
+  z-index: 3;
+  width: 32px; height: 32px;
+  border: 1px solid rgba(201,169,110,0.4);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  background: rgba(8,8,8,0.5);
+  backdrop-filter: blur(6px);
+}
+.video-item:hover .sound-indicator { opacity: 1; }
+.video-item.playing .sound-indicator { opacity: 1; border-color: var(--gold); }
+.sound-indicator svg { width: 14px; height: 14px; fill: var(--gold); }
+
+/* PHOTO MASONRY */
+.photo-section { margin-top: 3px; }
+.photo-grid {
+  display: grid;
+  gap: 3px;
+  grid-template-columns: repeat(5, 1fr);
+}
+.photo-item { position: relative; overflow: hidden; background: #0f0f0f; cursor: pointer; aspect-ratio: 3/4; }
+.photo-item.wide { grid-column: span 2; aspect-ratio: 4/3; }
+.photo-item.tall { aspect-ratio: 2/3; }
+.photo-item img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.85; transition: transform 0.7s ease, opacity 0.4s ease; }
+.photo-item:hover img { transform: scale(1.05); opacity: 1; }
+
+/* DIVIDER */
+.section-divider { display: flex; align-items: center; gap: 28px; padding: 0 52px; }
+.section-divider .line { flex: 1; height: 1px; background: var(--border); }
+.section-divider .ornament { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 20px; color: var(--gold); opacity: 0.5; }
+
+/* CLIENTS */
+.clients-wrap { padding: 72px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; }
+.clients-eyebrow { text-align: center; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); margin-bottom: 36px; }
+.marquee-outer { overflow: hidden; }
+.marquee-inner { display: flex; white-space: nowrap; animation: marquee 35s linear infinite; }
+.marquee-inner:hover { animation-play-state: paused; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.c-name { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(13px, 1.6vw, 17px); color: #555; padding: 0 36px; transition: color 0.3s; cursor: default; }
+.c-name:hover { color: var(--gold); }
+.c-dot { color: var(--dim); font-size: 10px; align-self: center; opacity: 0.4; }
+
+/* CONTACT */
+.contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.contact-eyebrow { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.contact-heading { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(36px, 5.5vw, 68px); line-height: 1; margin-bottom: 24px; }
+.contact-heading em { font-style: italic; color: var(--gold); }
+.contact-sub { font-size: 12px; line-height: 1.9; color: var(--muted); max-width: 380px; }
+.contact-links { display: flex; flex-direction: column; gap: 16px; }
+.c-link { display: flex; align-items: center; gap: 20px; padding: 22px 26px; border: 1px solid var(--border); text-decoration: none; transition: border-color 0.3s, background 0.3s; }
+.c-link:hover { border-color: rgba(201,169,110,0.4); background: var(--gold-dim); }
+.c-link-icon { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px; color: var(--gold); width: 20px; flex-shrink: 0; }
+.c-link-body { flex: 1; }
+.c-link-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.c-link-val { font-family: 'Cormorant Garamond', serif; font-size: 17px; color: var(--text); font-weight: 300; }
+.c-link-arr { font-size: 16px; color: var(--gold); opacity: 0; transition: opacity 0.3s, transform 0.3s; }
+.c-link:hover .c-link-arr { opacity: 1; transform: translateX(4px); }
+
+/* FOOTER */
+footer { padding: 28px 52px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.f-logo { font-family: 'Cormorant SC', serif; font-weight: 300; font-size: 13px; letter-spacing: 0.3em; color: var(--dim); }
+.f-copy { font-size: 10px; letter-spacing: 0.08em; color: var(--dim); }
+
+/* FADE UP */
+.fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.fade-up.vis { opacity: 1; transform: translateY(0); }
+
+/* LIGHTBOX */
+.lb { position: fixed; inset: 0; background: rgba(6,6,6,0.97); z-index: 500; display: none; align-items: center; justify-content: center; touch-action: none; }
+.lb.open { display: flex; }
+.lb-img { max-width: 92vw; max-height: 88vh; object-fit: contain; user-select: none; pointer-events: none; transition: opacity 0.2s; }
+.lb-img.fade { opacity: 0; }
+.lb-close { position: absolute; top: 20px; right: 24px; font-family: 'Cormorant Garamond', serif; font-size: 32px; color: var(--muted); cursor: pointer; background: none; border: none; line-height: 1; transition: color 0.2s; z-index: 10; }
+.lb-close:hover { color: var(--gold); }
+.lb-nav { position: absolute; top: 50%; transform: translateY(-50%); font-size: 28px; color: rgba(255,255,255,0.3); background: none; border: none; cursor: pointer; padding: 20px; z-index: 10; transition: color 0.2s; font-family: sans-serif; }
+.lb-nav:hover { color: var(--gold); }
+.lb-prev { left: 8px; }
+.lb-next { right: 8px; }
+.lb-counter { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 10px; letter-spacing: 0.2em; color: var(--muted); }
+
+
+/* LOAD MORE */
+.photo-grid [data-photo] { display: none; }
+.photo-grid [data-photo].visible { display: block; }
+.photo-fade {
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  margin-top: -120px;
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+.photo-fade.hidden { opacity: 0; pointer-events: none; }
+.load-more-wrap { text-align: center; padding: 32px 0 0; }
+.load-more-btn {
+  font-family: 'Cormorant SC', serif;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: none;
+  border: 1px solid rgba(201,169,110,0.35);
+  padding: 14px 40px;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s;
+}
+.load-more-btn:hover { background: var(--gold-dim); border-color: var(--gold); }
+#load-more-wrap.hidden { display: none; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 20px 24px; }
+  .nav-links { display: none; }
+  section { padding: 72px 24px; }
+  .hero-content { padding: 0 24px 64px; }
+  .hero-scroll { display: none; }
+
+  /* 2 columns on mobile — 10 videos = 5 rows of 2, clean */
+  .video-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .hotel-video-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .video-item { min-height: 200px; }
+
+  /* Photos: 2 col, reset all spans */
+  .photo-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .photo-item { aspect-ratio: 3/4 !important; }
+  .photo-item.wide { grid-column: span 1 !important; aspect-ratio: 3/4 !important; }
+
+  .contact-wrap { grid-template-columns: 1fr; gap: 48px; }
+  .section-divider { padding: 0 24px; }
+  footer { padding: 24px; flex-direction: column; gap: 10px; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .video-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .hotel-video-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .video-item { min-height: 200px; }
+  .hero-title { font-size: 52px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Matsu</a>
+  <ul class="nav-links">
+    <li><a href="#dining">Dining</a></li>
+    <li><a href="#hotels">Hotels</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg">
+    <iframe src="https://player.vimeo.com/video/1185800855?autoplay=1&loop=1&muted=1&background=1&quality=auto" allow="autoplay; fullscreen"></iframe>
+  </div>
+  <div class="hero-gradient"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Restaurant Media & Marketing Strategist</div>
+    <h1 class="hero-title">Visual Stories<br>That Shape<br><em>Brand Identity.</em></h1>
+    <div class="hero-sub">Jay Matsumoto &nbsp;·&nbsp; Los Angeles, CA</div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</div>
+
+<!-- DINING -->
+<section id="dining">
+  <div class="section-header fade-up">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Dining & Restaurants</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <!-- Row 1: 5 videos -->
+  <div class="video-grid fade-up" style="transition-delay:0.1s">
+    <div class="video-item" data-id="1185800713">
+      <iframe src="https://player.vimeo.com/video/1185800713?autoplay=1&loop=1&muted=1&background=1&quality=auto" allow="autoplay; fullscreen"></iframe>
+      <div class="video-overlay"></div>
+      <div class="video-meta"><div class="video-client">Ilya</div></div>
+      <div class="sound-indicator"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div>
+    </div>
+    <div class="video-item" data-id="1185800757">
+      <iframe src="https://player.vimeo.com/video/1185800757?autoplay=1&loop=1&muted=1&background=1&quality=auto" allow="autoplay; fullscreen"></iframe>
+      <div class="video-overlay"></div>
+      <div class="video-meta"><div class="video-client">Laya</div></div>
+      <div class="sound-indicator"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div>
+    </div>
+    <div class="video-item" data-id="1185799222">
+      <iframe src="https://player.vimeo.com/video/1185799222?autoplay=1&loop=1&muted=1&background=1&quality=auto" allow="autoplay; fullscreen"></iframe>
+      <div class="video-overlay"></div>
+      <div class="video-meta"><div class="video-client">OSA</div></div>
+      <div class="sound-indicator"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div>
+    </div>
+    <div class="video-item" data-id="1185800685">
+      <iframe src="https://player.vimeo.com/video/1185800685?autoplay=1&loop=1&muted=1&background=1&quality=auto" allow="autoplay; fullscreen"></iframe>
+      <div class="video-overlay"></div>
+      <div class="video-meta"><div class="video-client">UFO Bagel</div></div>
+      <div class="sound-indicator"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div>
+    </div>
+    <div class="video-item" data-id="1185825668">
+      <iframe src="https://player.vimeo.com/video/1185825668?autoplay=1&loop=1&muted=1&background=1&quality=auto" allow="autoplay; fullscreen"></iframe>
+      <div class="video-overlay"></div>
+      <div class="video-meta"><div class="video-client">Namoo</div></div>
+      <div class="sound-indicator"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div>
+    </div>
+  </div>
+
+  <!-- Row 2: 5 videos -->
+  <div class="video-grid fade-up" style="transition-delay:0.2s; margin-top:3px;">
+    <div class="video-item" data-id="1185825610">
+      <iframe src="https://player.vimeo.com/video/1185825610?autoplay=1&loop=1&muted=1&background=1&quality=auto" allow="autoplay; fullscreen"></iframe>
+      <div class="video-overlay"></div>
+      <div class="video-meta"><div class="video-client">Cir Lounge</div></div>
+      <div class="sound-indicator"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div>
+    </div>
+    <div class="video-item" data-id="1185825702">
+      <iframe src="https://player.vimeo.com/video/1185825702?autoplay=1&loop=1&muted=1&background=1&quality=auto" allow="autoplay; fullscreen"></iframe>
+      <div class="video-overlay"></div>
+      <div class="video-meta"><div class="video-client">Cork & Batter</div></div>
+      <div class="sound-indicator"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div>
+    </div>
+    <div class="video-item" data-id="1185825744">
+      <iframe src="https://player.vimeo.com/video/1185825744?autoplay=1&loop=1&muted=1&background=1&quality=auto" allow="autoplay; fullscreen"></iframe>
+      <div class="video-overlay"></div>
+      <div class="video-meta"><div class="video-client">Dive Oyster Bar</div></div>
+      <div class="sound-indicator"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div>
+    </div>
+    <div class="video-item" data-id="1185826733">
+      <iframe src="https://player.vimeo.com/video/1185826733?autoplay=1&loop=1&muted=1&background=1&quality=auto" allow="autoplay; fullscreen"></iframe>
+      <div class="video-overlay"></div>
+      <div class="video-meta"><div class="video-client">Nekohama</div></div>
+      <div class="sound-indicator"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div>
+    </div>
+    <div class="video-item" data-id="1185827137">
+      <iframe src="https://player.vimeo.com/video/1185827137?autoplay=1&loop=1&muted=1&background=1&quality=auto" allow="autoplay; fullscreen"></iframe>
+      <div class="video-overlay"></div>
+      <div class="video-meta"><div class="video-client">Spot Cafe</div></div>
+      <div class="sound-indicator"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div>
+    </div>
+  </div>
+
+  <!-- DINING PHOTOS -->
+  <div class="photo-section fade-up" style="transition-delay:0.3s;">
+    <div class="photo-grid" id="dining-photos">
+      <div class="photo-item" data-photo><img src="WID07008.jpg" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="DSC01973.JPEG" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="WID06971.jpg" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item wide" data-photo><img src="_7RV2737.jpg" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="IMG_3211.JPG" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="IMG_2478.JPG" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="DSC09911.JPEG" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="WID06957.jpg" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="DSC01883.JPEG" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item wide" data-photo><img src="IMG_8683.JPG" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="IMG_6519.JPG" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="IMG_2476.JPG" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="IMG_8673.JPG" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="WID06765.jpg" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="_7RV2594.jpg" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="_7RV2599.jpg" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="WID07382_Original.jpg" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="IMG_8681.JPG" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="WID00101_Original.jpg" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="_7RV2742.jpg" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="DSC00334.JPG" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item wide" data-photo><img src="IMG_8678.JPG" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="IMG_8669.JPG" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="DSC02116.JPEG" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="_7RV4452.jpg" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="DSC01984.JPEG" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="_7RV2722.jpg" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="_7RV2659.jpg" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="WID07411_Original.jpg" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="WID07433_Original.jpg" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="IMG_8672.JPG" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item wide" data-photo><img src="H69A0871.JPEG" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="_7RV2614.jpg" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+      <div class="photo-item" data-photo><img src="DSC02033.JPEG" alt="" loading="lazy" onclick="openLB(this.src)"></div>
+    </div>
+    <div class="photo-fade" id="photo-fade"></div>
+    <div class="load-more-wrap" id="load-more-wrap">
+      <button class="load-more-btn" onclick="loadMore()">Load More</button>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider">
+  <div class="line"></div>
+  <div class="ornament">✦</div>
+  <div class="line"></div>
+</div>
+
+<!-- HOTELS -->
+<section id="hotels">
+  <div class="section-header fade-up">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Hotels & Hospitality</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="hotel-video-grid fade-up" style="transition-delay:0.1s;">
+    <div class="video-item" data-id="1185800872">
+      <iframe src="https://player.vimeo.com/video/1185800872?autoplay=1&loop=1&muted=1&background=1&quality=auto" allow="autoplay; fullscreen"></iframe>
+      <div class="video-overlay"></div>
+      <div class="video-meta"><div class="video-client">OSA × AC Marriott</div></div>
+      <div class="sound-indicator"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div>
+    </div>
+    <div class="video-item" data-id="1185847110">
+      <iframe src="https://player.vimeo.com/video/1185847110?autoplay=1&loop=1&muted=1&background=1&quality=auto" allow="autoplay; fullscreen"></iframe>
+      <div class="video-overlay"></div>
+      <div class="video-meta"><div class="video-client">OSA × AC Marriott</div></div>
+      <div class="sound-indicator"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div>
+    </div>
+    <div class="video-item" data-id="1185800927">
+      <iframe src="https://player.vimeo.com/video/1185800927?autoplay=1&loop=1&muted=1&background=1&quality=auto" allow="autoplay; fullscreen"></iframe>
+      <div class="video-overlay"></div>
+      <div class="video-meta"><div class="video-client">Whiskey Hotel</div></div>
+      <div class="sound-indicator"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div>
+    </div>
+    <div class="video-item" data-id="1185847243">
+      <iframe src="https://player.vimeo.com/video/1185847243?autoplay=1&loop=1&muted=1&background=1&quality=auto" allow="autoplay; fullscreen"></iframe>
+      <div class="video-overlay"></div>
+      <div class="video-meta"><div class="video-client">Whiskey Hotel</div></div>
+      <div class="sound-indicator"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div>
+    </div>
+    <div class="video-item" data-id="1185827465">
+      <iframe src="https://player.vimeo.com/video/1185827465?autoplay=1&loop=1&muted=1&background=1&quality=auto" allow="autoplay; fullscreen"></iframe>
+      <div class="video-overlay"></div>
+      <div class="video-meta"><div class="video-client">Hollywood Hills Hotel</div></div>
+      <div class="sound-indicator"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div>
+    </div>
+    <div class="video-item" data-id="1185849383">
+      <iframe src="https://player.vimeo.com/video/1185849383?autoplay=1&loop=1&muted=1&background=1&quality=auto" allow="autoplay; fullscreen"></iframe>
+      <div class="video-overlay"></div>
+      <div class="video-meta"><div class="video-client">Hollywood Hills Hotel</div></div>
+      <div class="sound-indicator"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div>
+    </div>
+    <div class="video-item" data-id="1185826816">
+      <iframe src="https://player.vimeo.com/video/1185826816?autoplay=1&loop=1&muted=1&background=1&quality=auto" allow="autoplay; fullscreen"></iframe>
+      <div class="video-overlay"></div>
+      <div class="video-meta"><div class="video-client">Vitality</div></div>
+      <div class="sound-indicator"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div>
+    </div>
+    <div class="video-item" data-id="1185849384">
+      <iframe src="https://player.vimeo.com/video/1185849384?autoplay=1&loop=1&muted=1&background=1&quality=auto" allow="autoplay; fullscreen"></iframe>
+      <div class="video-overlay"></div>
+      <div class="video-meta"><div class="video-client">Vitality</div></div>
+      <div class="sound-indicator"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div>
+    </div>
+  </div>
+
+
+</section>
+
+<!-- CLIENTS -->
+<div class="clients-wrap">
+  <div class="clients-eyebrow">Trusted By</div>
+  <div class="marquee-outer">
+    <div class="marquee-inner" id="marquee"></div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap fade-up">
+    <div>
+      <div class="contact-eyebrow">Let's Work Together</div>
+      <h2 class="contact-heading">Elevate<br>Your <em>Brand.</em></h2>
+      <p class="contact-sub">Based in Los Angeles. Available for restaurants, hotels, and hospitality brands across Southern California and beyond.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:matsumotojay@gmail.com" class="c-link">
+        <div class="c-link-icon">@</div>
+        <div class="c-link-body"><div class="c-link-label">Email</div><div class="c-link-val">matsumotojay@gmail.com</div></div>
+        <div class="c-link-arr">→</div>
+      </a>
+      <a href="https://instagram.com/ikigailosangeles" target="_blank" class="c-link">
+        <div class="c-link-icon">◎</div>
+        <div class="c-link-body"><div class="c-link-label">Instagram</div><div class="c-link-val">@ikigailosangeles</div></div>
+        <div class="c-link-arr">→</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo">Matsu</div>
+  <div class="f-copy">© 2026 Jay Matsumoto · Los Angeles</div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb">
+  <button class="lb-close" onclick="closeLB()">×</button>
+  <button class="lb-nav lb-prev" onclick="navLB(-1)">&#8249;</button>
+  <img class="lb-img" id="lb-img" src="" alt="">
+  <button class="lb-nav lb-next" onclick="navLB(1)">&#8250;</button>
+  <div class="lb-counter" id="lb-counter"></div>
+</div>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script>
+
+// ── LOAD MORE PHOTOS ──
+const PHOTOS_PER_PAGE = 10; // 2 rows of 5
+let photosShown = 0;
+const allPhotoItems = document.querySelectorAll('#dining-photos [data-photo]');
+
+function loadMore() {
+  const end = Math.min(photosShown + PHOTOS_PER_PAGE, allPhotoItems.length);
+  for (let i = photosShown; i < end; i++) {
+    allPhotoItems[i].classList.add('visible');
+  }
+  photosShown = end;
+  if (photosShown >= allPhotoItems.length) {
+    document.getElementById('photo-fade').classList.add('hidden');
+    document.getElementById('load-more-wrap').classList.add('hidden');
+  }
+}
+// Show first batch on load
+loadMore();
+
+// ── HIDE FAILED VIMEO EMBEDS ──
+// Give iframes 4 seconds to load, hide those that stay blank
+setTimeout(() => {
+  document.querySelectorAll('.video-item[data-id]').forEach(item => {
+    const iframe = item.querySelector('iframe');
+    if (!iframe) {
+      item.style.display = 'none';
+    }
+  });
+  // Reflow grids to remove gaps
+  document.querySelectorAll('.video-grid, .hotel-video-grid').forEach(grid => {
+    const items = [...grid.querySelectorAll('.video-item')].filter(i => i.style.display !== 'none');
+    // If odd number, hide last to keep even grid
+    if (items.length % 2 !== 0) {
+      items[items.length - 1].style.display = 'none';
+    }
+  });
+}, 4000);
+
+// ── CLIENTS MARQUEE ──
+const clients = [
+  'OSA × AC Marriott','Hollywood Hills Hotel','Whiskey Hotel LA','Vitality',
+  'Kuramoto Omakase','Kodo','Ilya','Laya','Layla','Quarters KBBQ',
+  'Gangnam Station LA','Gangnam Station OC','Bonshabu','TGI KBBQ','Tonchin',
+  'Enchant LA','Katsubar','Spot Cafe','Gomen Ramen','Oyabun','Song Hak',
+  'Cir Lounge','Namoo','Nekohama','Dive Oyster Bar','Sonder',
+  'Cork & Batter','UFO Bagel'
+];
+const m = document.getElementById('marquee');
+[...clients,...clients].forEach(name => {
+  const s = document.createElement('span'); s.className = 'c-name'; s.textContent = name; m.appendChild(s);
+  const d = document.createElement('span'); d.className = 'c-dot'; d.textContent = '·'; m.appendChild(d);
+});
+
+// ── SCROLL OBSERVER ──
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('vis'); io.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+// ── CLICK TO UNMUTE / MUTE (one at a time) ──
+let currentPlayer = null;
+let currentItem = null;
+
+document.querySelectorAll('.video-item[data-id]').forEach(item => {
+  const iframe = item.querySelector('iframe');
+  const player = new Vimeo.Player(iframe);
+
+  item.addEventListener('click', async () => {
+    if (currentItem && currentItem !== item) {
+      // Mute previous
+      const prevIframe = currentItem.querySelector('iframe');
+      const prevPlayer = new Vimeo.Player(prevIframe);
+      await prevPlayer.setVolume(0);
+      currentItem.classList.remove('playing');
+    }
+
+    if (item.classList.contains('playing')) {
+      await player.setVolume(0);
+      item.classList.remove('playing');
+      currentItem = null;
+      currentPlayer = null;
+    } else {
+      await player.setVolume(1);
+      item.classList.add('playing');
+      currentItem = item;
+      currentPlayer = player;
+    }
+  });
+});
+
+// ── LIGHTBOX ──
+let lbPhotos = [];
+let lbIndex = 0;
+
+function buildPhotoList() {
+  lbPhotos = [...document.querySelectorAll('#dining-photos [data-photo].visible img')].map(i => i.src);
+}
+
+function openLB(src) {
+  buildPhotoList();
+  lbIndex = lbPhotos.indexOf(src);
+  if (lbIndex === -1) lbIndex = 0;
+  showLBPhoto();
+  document.getElementById('lb').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.body.style.position = 'fixed';
+  document.body.style.width = '100%';
+}
+
+function showLBPhoto() {
+  const img = document.getElementById('lb-img');
+  img.classList.add('fade');
+  setTimeout(() => {
+    img.src = lbPhotos[lbIndex];
+    img.classList.remove('fade');
+  }, 150);
+  document.getElementById('lb-counter').textContent = (lbIndex + 1) + ' / ' + lbPhotos.length;
+}
+
+function navLB(dir) {
+  lbIndex = (lbIndex + dir + lbPhotos.length) % lbPhotos.length;
+  showLBPhoto();
+}
+
+function closeLB() {
+  document.getElementById('lb').classList.remove('open');
+  document.body.style.overflow = '';
+  document.body.style.position = '';
+  document.body.style.width = '';
+}
+
+document.getElementById('lb').addEventListener('click', e => {
+  if(e.target.id === 'lb') closeLB();
+});
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape') closeLB();
+  if(e.key === 'ArrowRight') navLB(1);
+  if(e.key === 'ArrowLeft') navLB(-1);
+});
+
+// Swipe support
+let tsX = 0;
+document.getElementById('lb').addEventListener('touchstart', e => { tsX = e.touches[0].clientX; }, { passive: true });
+document.getElementById('lb').addEventListener('touchend', e => {
+  const diff = tsX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) navLB(diff > 0 ? 1 : -1);
+});
+</script>
+</body>
+</html>
