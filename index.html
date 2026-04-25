@@ -362,8 +362,8 @@ footer { padding: 28px 52px; border-top: 1px solid var(--border); display: flex;
     <div class="sub-header-title">Reels</div>
     <div class="sub-header-line"></div>
   </div>
-  <!-- Row 1: 5 videos -->
-  <div class="video-grid fade-up" style="transition-delay:0.1s">
+  <!-- All dining reels in one grid — broken iframes auto-hidden by JS, remainder reflows -->
+  <div class="video-grid fade-up" id="dining-reel-grid" style="transition-delay:0.1s">
     <div class="video-item" data-id="1185800713">
       <iframe src="https://player.vimeo.com/video/1185800713?autoplay=1&loop=1&muted=1&background=1&quality=auto" allow="autoplay; fullscreen"></iframe>
       <div class="video-overlay"></div>
@@ -394,10 +394,6 @@ footer { padding: 28px 52px; border-top: 1px solid var(--border); display: flex;
       <div class="video-meta"><div class="video-client">Namoo</div></div>
       <div class="sound-indicator"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div>
     </div>
-  </div>
-
-  <!-- Row 2: 5 videos -->
-  <div class="video-grid fade-up" style="transition-delay:0.2s; margin-top:3px;">
     <div class="video-item" data-id="1185825610">
       <iframe src="https://player.vimeo.com/video/1185825610?autoplay=1&loop=1&muted=1&background=1&quality=auto" allow="autoplay; fullscreen"></iframe>
       <div class="video-overlay"></div>
@@ -631,12 +627,17 @@ footer { padding: 28px 52px; border-top: 1px solid var(--border); display: flex;
 <script src="https://player.vimeo.com/api/player.js"></script>
 <script>
 
-// ── LOAD MORE PHOTOS — 6 at a time ──
+// ── LOAD MORE PHOTOS ──
+const isMobile = () => window.innerWidth <= 900;
+const INITIAL_COUNT = () => isMobile() ? 6 : 10;
+const BATCH_COUNT   = () => isMobile() ? 6 : 10;
+
 let photosShown = 0;
 const allPhotoItems = document.querySelectorAll('#dining-photos [data-photo]');
 
 function loadMore() {
-  const end = Math.min(photosShown + 6, allPhotoItems.length);
+  const batch = photosShown === 0 ? INITIAL_COUNT() : BATCH_COUNT();
+  const end = Math.min(photosShown + batch, allPhotoItems.length);
   for (let i = photosShown; i < end; i++) {
     allPhotoItems[i].classList.add('visible');
   }
@@ -686,24 +687,6 @@ document.getElementById('hotel-photos').addEventListener('click', function(e) {
   if (img && img.naturalWidth > 0) openLBImg(item, 'hotel');
 });
 // ── HIDE FAILED VIMEO EMBEDS ──
-// Give iframes 4 seconds to load, hide those that stay blank
-setTimeout(() => {
-  document.querySelectorAll('.video-item[data-id]').forEach(item => {
-    const iframe = item.querySelector('iframe');
-    if (!iframe) {
-      item.style.display = 'none';
-    }
-  });
-  // Reflow grids to remove gaps
-  document.querySelectorAll('.video-grid, .hotel-video-grid').forEach(grid => {
-    const items = [...grid.querySelectorAll('.video-item')].filter(i => i.style.display !== 'none');
-    // If odd number, hide last to keep even grid
-    if (items.length % 2 !== 0) {
-      items[items.length - 1].style.display = 'none';
-    }
-  });
-}, 4000);
-
 // ── CLIENTS MARQUEE ──
 const clients = [
   'OSA × AC Marriott','Hollywood Hills Hotel','Whiskey Hotel LA','Vitality',
@@ -720,10 +703,9 @@ const m = document.getElementById('marquee');
 });
 // Set duration based on content width so full list always scrolls before reset
 requestAnimationFrame(() => {
-  const totalWidth = m.scrollWidth / 2; // half = one full set
-  const speed = 80; // px per second — increase to go faster
+  const totalWidth = m.scrollWidth / 2;
+  const speed = window.innerWidth <= 900 ? 200 : 80; // 200px/s mobile, 80px/s desktop
   const duration = (totalWidth / speed) + 's';
-  m.style.setProperty('--marquee-duration', duration);
   m.style.animationDuration = duration;
 });
 
