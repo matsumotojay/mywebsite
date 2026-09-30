@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>MATSU | Photo, film and analytics for restaurants and hotels</title>
 <meta name="description" content="MATSU films restaurants, bars and hotels across Los Angeles and Southern California, and integrates AI into its analytics to show which content earns your guests' attention.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 44 48%27%3E%3Crect width=%2744%27 height=%2748%27 fill=%27%231C2625%27/%3E%3Cg fill=%27%23D0573E%27 transform=%27translate(0 1)%27%3E%3Cpath d=%27M2 6.4Q22 10.9 42 6.4L42 11.8Q22 16.3 2 11.8Z%27/%3E%3Cpath d=%27M8.4 19.6h27.2v4.8H8.4z%27/%3E%3Cpath d=%27M13 12.4h5.6L17 44.4h-5.6zM31 12.4h-5.6L27 44.4h5.6z%27/%3E%3C/g%3E%3C/svg%3E">
@@ -969,6 +969,128 @@ html.static .rcard.phone-card{opacity:1;transform:none}html.static .ph{animation
 @media (prefers-reduced-motion:reduce){.dstrip{animation:none!important;transform:translateY(calc((var(--d) + 10) * -.9em))!important}.rb-n .dch{opacity:1!important;transform:none!important;animation:none!important}.odo-sweep{display:none}.rb-cap{opacity:1;transform:none;transition:none}}
 html.static .dstrip{transform:translateY(calc((var(--d) + 10) * -.9em))}html.static .rb-n .dch{opacity:1;transform:none}html.static .rb-cap{opacity:1;transform:none}
 
+
+/* reels: Vimeo controls fallback */
+.video-item.controls iframe{pointer-events:auto;transform:translate(-50%,-50%)}
+.video-item.controls .v-poster,.video-item.controls .video-overlay,.video-item.controls .video-meta,.video-item.controls .v-cue,.video-item.controls .sound-indicator{display:none}
+
+/* ===== ROUND 11: phones only ===== */
+@media (max-width:768px){
+  :root{--sec:clamp(44px,11vw,60px)}
+  /* a. centred headers and intro text */
+  .h2,.lede,.work-head,.work-head p,.work-kicker,.intro-t,.who-k,.proof-head,.svc-title,#contact .contact-wrap > div,.faq .h2,.how .h2{text-align:center;margin-left:auto;margin-right:auto}
+  .h2{max-width:none}
+  .lede{max-width:34ch}
+  .wchips{justify-content:center}
+  .bign,.bign.small{justify-content:center;text-align:center}
+  .proof-head .flag{justify-self:center}
+  .flag.sample-start{display:flex;width:max-content;margin-left:auto;margin-right:auto}
+  .contact-cta{justify-self:center}
+  /* f. trims */
+  .intro{padding:56px 0 28px}
+  .intro .intro-t{margin-top:10px}
+  .bign.small{margin-top:26px;gap:36px}
+  .fstrip{margin-top:28px}
+  .fs{height:96px}
+  .vhead{min-height:48svh;margin-bottom:18px}
+  .vhead > .wrap{padding-bottom:20px}
+  .mosaic,#mzHosp{grid-template-rows:170px 110px 110px;margin-bottom:20px}
+  .sub{margin:24px 0 10px}
+  .hgal{margin-top:24px}
+  .hgal .photo-item{height:250px}
+  .gind{margin-top:14px}
+  #restaurants.work{padding-bottom:36px}
+  #hotels.work{padding-top:36px}
+  .svc-grid{margin-top:22px}
+  #identity .lede{margin-bottom:22px}
+  .dash{margin-top:24px}
+  .steps{margin-top:30px;row-gap:30px}
+  .clients{padding:28px 0}
+  #contact{padding:52px 0}
+  /* b. reach: two phones in a V, captions side by side */
+  .reach-big{gap:6px}
+  .rb-n{font-size:25vw}
+  .rcards{grid-template-columns:1fr 1fr;gap:0 10px;margin-top:30px;justify-content:stretch}
+  .rcard.phone-card{transform:translateY(70px);}
+  .phone-card .ph{width:82%;aspect-ratio:9/19.5;border-radius:26px;padding:6px;margin:0 auto;position:relative}
+  .phone-card:nth-child(1) .ph{transform-origin:100% 100%;rotate:-7deg;left:24px;z-index:2}
+  .phone-card:nth-child(2) .ph{transform-origin:0% 100%;rotate:7deg;left:-24px;z-index:1}
+  .phone-card .ph:hover{transform:none}
+  .ph-screen{border-radius:21px}
+  .ph-island{top:6px;height:12px;border-radius:8px}
+  .phone-card .rc-views{left:10px;bottom:10px}
+  .phone-card .rc-views b{font-size:13px}
+  .phone-card .rc-views svg{width:13px;height:13px}
+  .phone-card .rc-body{padding:18px 2px 0;text-align:center;align-items:center;gap:2px}
+  .phone-card .rc-t{font-size:13px;line-height:1.2;min-height:4.8em}
+  .phone-card .rc-hired{font-size:12px}
+  .phone-card .rc-n{margin-top:6px;font-size:12px}
+  .phone-card .rc-n b{font-size:1.9rem;margin-right:3px}
+  .phone-card .rc-sub{font-size:11px;min-height:2.6em}
+  .phone-card .rc-links{flex-direction:column;align-items:center;gap:4px;margin-top:6px}
+  .phone-card .rc-links a{font-size:12px}
+  /* c. about centred */
+  .jay-grid2{justify-items:center;text-align:center}
+  .jay-photo.round{width:180px;height:180px;margin:0 auto}
+  .jay-col .lede{margin-left:auto;margin-right:auto}
+  .creds2{grid-template-columns:1fr 1fr;justify-items:center;text-align:center;margin-left:auto;margin-right:auto;row-gap:20px}
+  .creds2 li{align-items:center}
+  /* d. services 2 x 2 x 2, last card spans */
+  .svc-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+  .svc-card{min-width:0}
+  .vhead .h2{font-size:13.5vw}
+  .svc-card.wide{grid-column:1 / -1}
+  .svc-card .g{height:104px}
+  .svc-card .g > *{transform:scale(.68);transform-origin:center}
+  .svc-card .t{padding:12px 12px 14px}
+  .svc-card .h3{font-size:14.5px}
+  .svc-card p{font-size:13px;line-height:1.45;margin-top:5px}
+  .g-film{padding:0 10px}
+  /* e. palette 2 x 2 */
+  .idgrid{grid-template-columns:1fr 1fr;gap:18px 12px}
+  .idc .lbl,.feel{font-size:11.5px;padding:3px 7px}
+  .idc-name{font-size:1rem}
+  .idc-name small{display:block;font-size:11.5px}
+  .idc-feel{font-size:12.5px}
+  .pal{height:14px;margin-top:8px}
+}
+
+/* ===== ROUND 12: phones only ===== */
+/* touch reels (class is only added on touch devices) */
+.video-item.touch-embed iframe{pointer-events:auto;z-index:2;transform:translate(-50%,-50%)}
+.video-item.touch-embed .video-overlay,.video-item.touch-embed .video-meta{pointer-events:none;z-index:3;transition:opacity .4s}
+.video-item.touch-embed .v-cue,.video-item.touch-embed .sound-indicator{display:none}
+.video-item.touch-embed.tplaying .video-overlay,.video-item.touch-embed.tplaying .video-meta{opacity:0}
+.video-item.touch-embed .video-overlay{background:linear-gradient(to top,rgba(14,19,18,.6) 0%,rgba(14,19,18,0) 30%)}
+.swipe-hint{display:none}
+@media (max-width:768px){
+  /* hero: full bleed to the top, copy over the video */
+  .hero{min-height:100svh;display:flex;align-items:flex-end;padding-top:0}
+  .hero-media{position:absolute;inset:0;aspect-ratio:auto;max-height:none;width:auto}
+  .hero-media::after{background:
+    linear-gradient(to top,var(--ink) 0%,rgba(28,38,37,.9) 16%,rgba(14,19,18,.6) 40%,rgba(14,19,18,.15) 62%,rgba(14,19,18,0) 72%),
+    linear-gradient(to bottom,rgba(14,19,18,.55) 0%,rgba(14,19,18,0) calc(80px + env(safe-area-inset-top)))}
+  .hero-copy{padding-top:0;padding-bottom:calc(36px + env(safe-area-inset-bottom));text-align:left}
+  .hero .hero-cta{margin-top:20px}
+  nav .wrap{padding-top:env(safe-area-inset-top);height:calc(60px + env(safe-area-inset-top))}
+  /* headlines always fit */
+  .vhead .h2{font-size:clamp(2.1rem,11.2vw,5rem);overflow-wrap:break-word}
+  .h2{overflow-wrap:break-word}
+  .wm-xl{font-size:clamp(3.4rem,18vw,6rem)}
+  .vhead .work-kicker{text-shadow:0 1px 10px rgba(0,0,0,.75)}
+  /* swipe hint pill */
+  .hgal.flat .hgal-pin{position:relative}
+  .hgal.flat .swipe-hint{display:inline-flex;align-items:center;gap:6px;position:absolute;top:10px;left:calc(var(--gut) + 8px);z-index:3;
+    padding:6px 10px;border-radius:99px;background:rgba(14,19,18,.72);color:#F1EFE9;font-size:12px;font-weight:600;
+    backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);transition:opacity .5s,transform .5s;pointer-events:none}
+  .swipe-hint i{font-style:normal;display:inline-block;animation:nudge 1.4s ease-in-out infinite}
+  @keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+  .hgal.swiped .swipe-hint{opacity:0;transform:translateY(-6px)}
+  /* top reels marquee */
+  .reels3.marq{scroll-snap-type:none;overflow-x:auto}
+  .reels3.marq .mreel{scroll-snap-align:none}
+}
+@media (max-width:768px) and (prefers-reduced-motion:reduce){.swipe-hint i{animation:none}}
 </style>
 </head>
 <body>
@@ -1442,10 +1564,6 @@ const HERO_MEDIA = {
           <div class="c-link-body"><div class="c-link-label">Email</div><div class="c-link-val">matsumotojay@gmail.com</div></div>
           <div class="c-link-arr" aria-hidden="true">&rarr;</div>
         </a>
-        <a href="https://instagram.com/ikigailosangeles" target="_blank" rel="noopener" class="c-link">
-          <div class="c-link-body"><div class="c-link-label">Instagram</div><div class="c-link-val">@ikigailosangeles</div></div>
-          <div class="c-link-arr" aria-hidden="true">&rarr;</div>
-        </a>
       </div>
     </div>
   </div>
@@ -1686,30 +1804,35 @@ const clients=['OSA × AC Marriott','Hollywood Hills Hotel','Whiskey Hotel LA','
   [...clients,...clients].forEach(n=>{const s=document.createElement('span');s.className='c-name';s.textContent=n;m.appendChild(s);});
   requestAnimationFrame(()=>{ m.style.animationDuration=(m.scrollWidth/2/45)+'s'; }); })();
 
-/* REELS: mount on demand, click for sound */
-let currentItem=null; const players=new WeakMap();
-function mount(item){
-  if(item.dataset.mounted) return players.get(item);
-  item.dataset.mounted='1';
+/* REELS: same mechanism as the old site, where sound worked on iPhone.
+   Each reel is a Vimeo iframe in background mode (autoplay, loop, muted) that is already playing as a silent preview.
+   A tap unmutes it through the Player API (setVolume(1) and setMuted(false)); a second tap mutes it again.
+   One reel has sound at a time. Iframes exist only within about one screen of the viewport. No overlay, no swap, no controls. */
+let currentItem=null; const players=new Map();
+function reelSrc(id){ return `https://player.vimeo.com/video/${id}?autoplay=1&loop=1&muted=1&background=1&quality=auto`; }
+function ensureReel(item){
+  if(players.has(item)) return players.get(item);
   const f=document.createElement('iframe');
-  f.src=`https://player.vimeo.com/video/${item.dataset.id}?autoplay=1&loop=1&muted=0&controls=0&playsinline=1&quality=auto`;
-  f.allow='autoplay; fullscreen; encrypted-media'; f.setAttribute('tabindex','-1'); f.setAttribute('aria-hidden','true');
+  f.src=reelSrc(item.dataset.id); f.allow='autoplay; fullscreen';
+  f.title=((item.querySelector('.video-client')||{}).textContent||'')+' reel'; f.setAttribute('tabindex','-1'); f.setAttribute('aria-hidden','true');
   item.insertBefore(f,item.firstChild);
-  const pl=new Vimeo.Player(f); players.set(item,pl);
   f.addEventListener('load',()=>item.classList.add('live'));
-  pl.ready().then(()=>{ pl.setVolume(1).catch(()=>{}); pl.play().catch(()=>{ pl.setMuted(true).then(()=>pl.play()).then(()=>item.classList.add('needs-tap')).catch(()=>{}); }); });
+  const pl=(window.Vimeo&&Vimeo.Player)?new Vimeo.Player(f):null; players.set(item,pl);
   return pl;
 }
-function unmount(item){ const f=item.querySelector('iframe'); if(f) f.remove(); players.delete(item); delete item.dataset.mounted; item.classList.remove('live','playing','needs-tap'); }
+function dropReel(item){ if(item===currentItem) return; const f=item.querySelector('iframe'); if(f) f.remove(); players.delete(item); item.classList.remove('live','playing'); }
+const reelIO=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) ensureReel(e.target); else dropReel(e.target); }),{rootMargin:'100% 0px'});
 document.querySelectorAll('.video-item[data-id]').forEach(item=>{
   item.setAttribute('role','button'); item.setAttribute('tabindex','0');
   item.setAttribute('aria-label','Play '+(item.querySelector('.video-client')||{}).textContent+' reel with sound');
-  const go=async()=>{
-    if(item.classList.contains('playing')&&!item.classList.contains('needs-tap')){ unmount(item); currentItem=null; return; }
-    if(item.classList.contains('needs-tap')){ const p=players.get(item); if(p){ await p.setMuted(false).catch(()=>{}); await p.setVolume(1).catch(()=>{}); item.classList.remove('needs-tap'); return; } }
-    if(currentItem&&currentItem!==item) unmount(currentItem);
-    const pl=mount(item); item.classList.add('playing'); currentItem=item;
-    try{ await pl.setMuted(false); await pl.setVolume(1); }catch(e){}
+  reelIO.observe(item);
+  const go=()=>{
+    const pl=ensureReel(item); if(!pl) return;
+    if(currentItem===item){ pl.setVolume(0).catch(()=>{}); pl.setMuted(true).catch(()=>{}); item.classList.remove('playing'); currentItem=null; return; }
+    if(currentItem){ const op=players.get(currentItem); if(op){ op.setVolume(0).catch(()=>{}); op.setMuted(true).catch(()=>{}); } currentItem.classList.remove('playing'); }
+    currentItem=item; item.classList.add('playing');
+    /* inside the tap: unmute both ways, make sure it is playing */
+    pl.setMuted(false).catch(()=>{}); pl.setVolume(1).catch(()=>{}); pl.play().catch(()=>{});
   };
   item.addEventListener('click',go);
   item.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); } });
@@ -1741,8 +1864,11 @@ document.querySelectorAll('.video-item[data-id]').forEach(item=>{
   function paint(){
     let p;
     if(STILL) p=1; else { const r=idgrid.getBoundingClientRect(), vh=innerHeight, c=r.top+r.height/2; p=Math.max(0,Math.min(1,(vh-r.bottom)/(vh*0.3))); }
+    const phone=innerWidth<=768&&!STILL, vh2=innerHeight;
     cards.forEach((card,ci)=>{ const chips=[...card.querySelectorAll('.pal span')];
-      (card._geo||[]).forEach((g,i)=>{ let t=(p-(ci*0.085+i*0.075))/0.30; t=Math.max(0,Math.min(1,t)); const e=t*t*(3-2*t);
+      /* phones: each card starts when its top reaches 75% of the screen, so lines draw while the photo is visible */
+      const pc=phone?Math.max(0,Math.min(1,(vh2*0.75-card.getBoundingClientRect().top)/(vh2*0.3))):0;
+      (card._geo||[]).forEach((g,i)=>{ let t=phone?(pc-i*0.1)/0.5:(p-(ci*0.085+i*0.075))/0.30; t=Math.max(0,Math.min(1,t)); const e=t*t*(3-2*t);
         g.halo.style.strokeDashoffset=g.len*(1-e); g.link.style.strokeDashoffset=g.len*(1-e); g.src.style.opacity=Math.min(1,e*3);
         g.trav.setAttribute('cx',g.x1+(g.x2-g.x1)*e); g.trav.setAttribute('cy',g.y1+(g.y2-g.y1)*e); g.trav.style.opacity=(e>0.02&&e<0.99)?1:0;
         chips[i].style.transform=`scaleY(${0.08+0.92*e})`; chips[i].style.opacity=0.25+0.75*e; }); });
@@ -2098,6 +2224,36 @@ const REACH_CARDS = [
     fig.style.setProperty('--jd',Math.round(b.bottom-a.top)+'px'); fig.style.setProperty('--jt',Math.round(a.top-c.top)+'px'); };
   fit(); addEventListener('resize',()=>{clearTimeout(fig._t);fig._t=setTimeout(fit,120);});
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit); setTimeout(fit,1500);
+})();
+
+
+/* ===== ROUND 12 (phones) ===== */
+/* SWIPE HINTS on the phone photo rows */
+document.querySelectorAll('.hgal').forEach(g=>{
+  const pin=g.querySelector('.hgal-pin'), tr=g.querySelector('.hgal-track');
+  const h=document.createElement('span'); h.className='swipe-hint'; h.setAttribute('aria-hidden','true');
+  h.innerHTML='Swipe left to see more photos <i>&rarr;</i>'; pin.appendChild(h);
+  let start=null;
+  tr.addEventListener('scroll',()=>{ if(start===null) start=tr.scrollLeft; if(Math.abs(tr.scrollLeft-start)>12) g.classList.add('swiped'); },{passive:true});
+  tr.addEventListener('touchstart',()=>{ start=tr.scrollLeft; },{passive:true});
+});
+
+/* TOP REELS on phones: slow automatic pan that loops; pauses under a finger; reduced motion keeps a normal swipe row */
+(function(){
+  const row=document.querySelector('.reels3'); if(!row) return;
+  const phone=matchMedia('(max-width:768px)');
+  if(!phone.matches||STILL) return;
+  [...row.children].forEach(c=>{ const k=c.cloneNode(true); k.setAttribute('aria-hidden','true'); k.classList.add('clone'); row.appendChild(k); });
+  row.classList.add('marq');
+  let half=0, held=false, vis=false, last=performance.now(), resume=0, pos=0;
+  const measure=()=>{ const n=row.children.length/2; half=row.children[n].offsetLeft-row.children[0].offsetLeft; };
+  measure(); addEventListener('resize',measure);
+  new IntersectionObserver(([e])=>{vis=e.isIntersecting;},{threshold:0}).observe(row);
+  row.addEventListener('touchstart',()=>{held=true;clearTimeout(resume);},{passive:true});
+  row.addEventListener('touchend',()=>{ resume=setTimeout(()=>{held=false;pos=row.scrollLeft;},1500); },{passive:true});
+  (function tick(now){ const dt=Math.min(.05,(now-last)/1000); last=now;
+    if(vis&&!held&&half>0){ pos+=26*dt; if(pos>=half) pos-=half; row.scrollLeft=pos; }
+    requestAnimationFrame(tick); })(last);
 })();
 
 /* LIGHTBOX */
