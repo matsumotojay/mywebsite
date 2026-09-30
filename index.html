@@ -1091,6 +1091,34 @@ html.static .dstrip{transform:translateY(calc((var(--d) + 10) * -.9em))}html.sta
   .reels3.marq .mreel{scroll-snap-align:none}
 }
 @media (max-width:768px) and (prefers-reduced-motion:reduce){.swipe-hint i{animation:none}}
+
+/* ===== ROUND 13: analytics panels as a 2 x 2 grid on phones ===== */
+@media (max-width:768px){
+  .dgrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+  .dgrid > .pn{grid-column:auto;padding:10px 10px 8px;min-width:0}
+  .p-reels,.p-next,.p-bench,.p-fix{grid-column:1 / -1 !important}
+  .p-reels{order:1}.p-line{order:2}.p-rating{order:3}.p-top{order:4}.p-dist{order:5}.p-chips{order:6}.p-work{order:7}.p-next{order:8}.p-bench{order:9}.p-fix{order:10}
+  .dgrid .pn-t{font-size:13px;line-height:1.25}
+  .dgrid .pn-s{font-size:11px;line-height:1.35}
+  .dgrid .lgd{gap:8px;font-size:11px;flex-wrap:wrap}
+  .dgrid .chart text{font-size:9.5px}
+  .dgrid .chart .wm-s{font-size:9px}
+  .p-top .tabs{flex-wrap:wrap;gap:2px}
+  .p-top .tab{font-size:12px;padding:6px 6px}
+  .p-top .bars{gap:8px}
+  .p-top .brow{font-size:12px}
+  .p-dist .drow{grid-template-columns:30px 1fr 30px;gap:6px;font-size:11.5px}
+  .p-chips .chips{gap:5px}
+  .p-chips .chip{font-size:11.5px;padding:4px 7px}
+  .p-chips .chip-key{flex-wrap:wrap;gap:8px}
+  .p-work .ww{grid-template-columns:1fr;gap:10px}
+  .p-work .wwr{font-size:11.5px}
+  .p-next .next{grid-template-columns:1fr}
+  .fix.ins{grid-template-columns:1fr 1fr;gap:10px}
+  .fix.ins li{font-size:12px;padding-top:8px}
+  .fix.ins li::before{font-size:1.05rem;margin-bottom:2px}
+  .fix.ins li span{font-size:12px}
+}
 </style>
 </head>
 <body>
@@ -1574,7 +1602,6 @@ const HERO_MEDIA = {
 <footer>
   <div class="wrap">
     <span class="wm" role="img" aria-label="MATSU">M<svg viewBox="0 4 44 41" fill="var(--accent)" aria-hidden="true"><use href="#torii"/></svg>TSU</span>
-    <span data-copy="footer">&copy; 2026 MATSU, Torrance and Los Angeles</span>
   </div>
 </footer>
 
@@ -1687,7 +1714,7 @@ const COPY = {
   clientsTitle:"Brands we've filmed for",
   contactTitle: "Your next guests are deciding online right now.",
   contactBody: "Social content is how people choose where to eat and where to stay. If your business isn't showing up there, you're limiting your own growth. Let's talk about what that could look like for you. The call is free, takes 10 minutes and carries zero risk.",
-  footer:      "\u00a9 2026 MATSU, Torrance and Los Angeles"
+  footerNote:  ""
 };
 (function applyCopy(){
   document.querySelectorAll('[data-copy]').forEach(el=>{
@@ -1903,13 +1930,13 @@ document.querySelectorAll('.video-item[data-id]').forEach(item=>{
   const host=document.getElementById('chLine');
   function drawLine(){
     host.innerHTML='';
-    const W=host.clientWidth||320, H=W<420?200:230, m={l:40,r:10,t:16,b:24};
+    const W=host.clientWidth||320, H=W<260?150:(W<420?200:230), m={l:W<260?30:40,r:10,t:16,b:24};
     const svg=el('svg',{width:W,height:H,viewBox:`0 0 ${W} ${H}`,role:'img',tabindex:'0','aria-label':'Line chart of weekly views over 12 weeks for reels and photos, sample data. Reels rose from 5,200 to 12,600 views a week; photos stayed between 2,000 and 3,100.'},host);
     const defs=el('defs',{},svg), g=el('linearGradient',{id:'areaG',x1:0,y1:0,x2:0,y2:1},defs);
     el('stop',{offset:'0%','stop-color':'#E0785F','stop-opacity':'.32'},g); el('stop',{offset:'100%','stop-color':'#E0785F','stop-opacity':'0'},g);
     const ymax=14000, x=i=>m.l+i/11*(W-m.l-m.r), y=v=>H-m.b-v/ymax*(H-m.t-m.b);
     [0,3500,7000,10500,14000].forEach((v,k)=>{ el('line',{x1:m.l,x2:W-m.r,y1:y(v),y2:y(v),class:k?'gl':'ax'},svg); txt(v?(v/1000)+'k':'0',{x:m.l-7,y:y(v)+4,'text-anchor':'end'},svg); });
-    [0,3,6,9,11].forEach(i=>txt('Wk '+(i+1),{x:x(i),y:H-6,'text-anchor':'middle'},svg));
+    (W<260?[0,5,11]:[0,3,6,9,11]).forEach(i=>txt('Wk '+(i+1),{x:x(i),y:H-6,'text-anchor':'middle'},svg));
     txt('Sample data',{x:W-m.r,y:m.t-4,'text-anchor':'end',class:'wm-s'},svg);
     const path=a=>a.map((v,i)=>(i?'L':'M')+x(i).toFixed(1)+' '+y(v).toFixed(1)).join(' ');
     el('path',{d:path(REELS)+` L${x(11)} ${y(0)} L${x(0)} ${y(0)} Z`,class:'area'},svg);
@@ -2001,7 +2028,7 @@ setTimeout(()=>document.querySelectorAll('.split,.wchips,.pn').forEach(el=>{ if(
   const G=[4.3,4.3,4.2,4.3,4.4,4.4,4.5,4.4,4.5,4.6,4.5,4.6], Y=[3.8,3.9,3.7,3.8,3.9,4.0,4.0,4.1,4.0,4.2,4.1,4.2];
   const host=document.getElementById('chRating');
   function draw(){
-    host.innerHTML=''; const W=host.clientWidth||320, H=W<420?190:220, m={l:34,r:12,t:16,b:24};
+    host.innerHTML=''; const W=host.clientWidth||320, H=W<260?150:(W<420?190:220), m={l:W<260?28:34,r:12,t:16,b:24};
     const svg=el('svg',{width:W,height:H,viewBox:`0 0 ${W} ${H}`,role:'img',tabindex:'0','aria-label':'Sample data. Average Google rating rose from 4.3 to 4.6 and Yelp from 3.8 to 4.2 over twelve months.'},host);
     const lo=3.5,hi=5, x=i=>m.l+i/11*(W-m.l-m.r), y=v=>H-m.b-(v-lo)/(hi-lo)*(H-m.t-m.b);
     [3.5,4,4.5,5].forEach((v,k)=>{ el('line',{x1:m.l,x2:W-m.r,y1:y(v),y2:y(v),class:k?'gl':'ax'},svg); txt(v.toFixed(1),{x:m.l-6,y:y(v)+4,'text-anchor':'end'},svg); });
